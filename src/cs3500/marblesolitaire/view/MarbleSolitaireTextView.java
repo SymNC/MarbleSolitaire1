@@ -26,29 +26,25 @@ public class MarbleSolitaireTextView implements MarbleSolitaireView {
     StringBuilder s = new StringBuilder();
     for (int r = 0; r < game.getBoardSize(); r++) {
       for (int c = 0; c < game.getBoardSize(); c++) {
-
-        if (c <= game.getBoardSize() / 2) {
-          s.append(slotString(game.getSlotAt(r, c))).append(" ");
+        if (c< game.getBoardSize()/2){
+          s.append(slotString(game.getSlotAt(r,c))).append(" ");
         }
-        if (c == game.getBoardSize() - 1 && !game.getSlotAt(r, c)
-                .equals(MarbleSolitaireModelState.SlotState.Invalid)) {
-          s.append(slotString(game.getSlotAt(r, c)));
-        }
-        if (c > game.getBoardSize() / 2 && c <= game.getBoardSize() - 2) {
+        else{
+        try{
 
-          if (!game.getSlotAt(r, c).equals(MarbleSolitaireModelState.SlotState.Invalid)
-                  && game.getSlotAt(r, c + 1)
-                  .equals(MarbleSolitaireModelState.SlotState.Invalid)) {
-            s.append(slotString(game.getSlotAt(r, c)));
-
+          if(game.getSlotAt(r,c)!= MarbleSolitaireModelState.SlotState.Invalid){
+            s.append(slotString(game.getSlotAt(r,c)));
+            if(game.getSlotAt(r,c+1)!= MarbleSolitaireModelState.SlotState.Invalid){
+              s.append(" ");
+            }
           }
-          if (!game.getSlotAt(r, c).equals(MarbleSolitaireModelState.SlotState.Invalid)
-                  && !game.getSlotAt(r, c + 1)
-                  .equals(MarbleSolitaireModelState.SlotState.Invalid)) {
-            s.append(slotString(game.getSlotAt(r, c))).append(" ");
 
-          }
         }
+        catch (Exception e){
+          //print(e);
+          break; //exit loop, and start on next row after out of bounds c + 1
+        }
+      }
       }
 
       if (r < game.getBoardSize() - 1) {
