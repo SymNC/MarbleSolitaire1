@@ -19,6 +19,7 @@ public class MarbleSolitaireTextView implements MarbleSolitaireView {
       throw new IllegalArgumentException("MarbleSolitaireModelState null");
     }
     this.game = game;
+    this.game =game;
   }
 
   @Override
